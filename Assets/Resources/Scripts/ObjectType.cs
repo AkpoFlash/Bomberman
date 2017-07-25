@@ -6,5 +6,6 @@ enum ObjectType {
     Empty = 0,
     UnbreakWall = 1,
     BreakWall = 2,
-    Player = 3
+    Player = 3,
+    Enemy = 4
 }

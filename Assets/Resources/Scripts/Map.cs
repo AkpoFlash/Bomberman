@@ -10,6 +10,8 @@ public static class Map {
 
     public static int countOfBreakWall;
 
+    public static int countOfEnemies;
+
     public static double probabilityAppearanceBreakWall = 0.3;
 
     public static int[,] matrixMap;
