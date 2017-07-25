@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public int rowCount = 15;
     public int colCount = 15;
     public int countOfBreakWall = 50;
+    public int countOfEnemies = 3;
 
     public GameObject ground;
     public GameObject breakWall;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour {
 
 
     void Start () {
-        MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall);
+        MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies);
         Camera camera = new Camera(mainCamera);
         map.AddGround(ground);
         map.AddUnbreakWall(unbreakWall);

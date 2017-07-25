@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLoader : Player {
+public class PlayerLoader : DinamicObject {
 
     public override GameObject GetElement(string name)
     {
-        return Resources.Load("Prefabs/Players/" + name) as GameObject;
+        return Resources.Load("Prefabs/DinamicObject/" + name) as GameObject;
     }
 
 }
