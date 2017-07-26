@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class GroundGenerator : EnvironmentGenerator {
 
-    public void Generate(string prefabName)
+    public override void Generate(GameObject gameObject)
     {
-        GroundLoader groundPrefab = new GroundLoader();
-
-        for (int i = 0; i < Map.row; i++)
+        for (int i = 0; i < Game.row; i++)
         {
-            for (int j = 0; j < Map.col; j++)
+            for (int j = 0; j < Game.col; j++)
             {
-                Instantiate(groundPrefab.GetElement(prefabName), new Vector3(j, 0, i), Quaternion.identity);
+                Game.AddObjectToMap(gameObject, new Vector3(j, 0, i), ObjectType.Empty);
             }
         }
     }

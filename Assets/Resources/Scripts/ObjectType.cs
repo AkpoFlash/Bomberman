@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum ObjectType {
+public enum ObjectType {
     Empty = 0,
     UnbreakWall = 1,
     BreakWall = 2,

@@ -6,41 +6,44 @@ using UnityEngine;
 public class BreakWallGenerator : EnvironmentGenerator
 {
 
-    public void Generate(string prefabName)
+    public override void Generate(GameObject gameObject)
     {
-        BreakWallLoader breakWallPrefab = new BreakWallLoader();
-
-        for (int i = 1; i < Map.row - 1; i++)
+        for (int i = 2; i < Game.row - 2; i++)
         {
-            for (int j = 1; j < Map.col - 1; j++)
+            for (int j = 2; j < Game.col - 2; j++)
             {
                 if (CanSetBreakWall(i, j, 0) && IsEvenCell(i-1, j-1))
                 {
-                    Instantiate(breakWallPrefab.GetElement(prefabName), new Vector3(j, 0.5f, i), Quaternion.identity);
-                    Map.matrixMap[i, j] = (int)ObjectType.BreakWall;
+                    Game.AddObjectToMap(gameObject, new Vector3(j, 0.5f, i), ObjectType.BreakWall);
+
                 }
             }
         }
     }
 
-    public void GenerateRandom(string prefabName)
+    public void GenerateRandom(GameObject gameObject)
     {
-        BreakWallLoader breakWallPrefab = new BreakWallLoader();
         System.Random randomValue = new System.Random();
         int currentCountOfWall = 0;
 
-        for (int i = 1; i < Map.row - 1; i++)
+        for (int i = 1; i < Game.row - 1; i++)
         {
-            for (int j = 1; j < Map.col - 1; j++)
+            for (int j = 1; j < Game.col - 1; j++)
             {
-                if (CanSetBreakWall(i, j, currentCountOfWall) && Map.CheckRandomAppearance(Map.probabilityAppearanceBreakWall, randomValue))
+                if (CanSetBreakWall(i, j, currentCountOfWall) && Game.CheckRandomAppearance(Game.probabilityAppearanceBreakWall, randomValue))
                 {
-                    Instantiate(breakWallPrefab.GetElement(prefabName), new Vector3(j, 0.5f, i), Quaternion.identity);
-                    Map.matrixMap[i, j] = (int)ObjectType.BreakWall;
+                    Game.AddObjectToMap(gameObject, new Vector3(j, 0.5f, i), ObjectType.BreakWall);
                     currentCountOfWall++;
                 }
             }
         }
+    }
+
+    private bool CanSetBreakWall(int i, int j, int currentCountOfWall)
+    {
+        return Game.matrixMap[i, j] == (int)ObjectType.Empty
+                && !(i == 1 && j == 1 || i == 1 && j == 2 || i == 2 && j == 1)
+                && currentCountOfWall < Game.countOfBreakWall;
     }
 
 }
