@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyGenerator : MonoBehaviour {
+public class EnemyGenerator : DinamicObjectGenerator {
 
-    public void Generate(string prefabName)
+    public override void Generate(GameObject gameObject)
     {
-        EnemyLoader enemyPrefab = new EnemyLoader();
         System.Random randomValue = new System.Random();
         int currentCountOfEnemies = 0;
 
         
-        while (currentCountOfEnemies < Map.countOfEnemies)
+        while (currentCountOfEnemies < Game.countOfEnemies)
         {
-            int row = randomValue.Next(1, Map.row - 1);
-            int col = randomValue.Next(1, Map.col - 1);
-            Debug.Log(row + " " + col);
-            if (Map.matrixMap[row, col] == (int)ObjectType.Empty)
+            int row = randomValue.Next(1, Game.row);
+            int col = randomValue.Next(1, Game.col);
+            
+            if (Game.matrixMap[row, col] == (int)ObjectType.Empty)
             {
-                Instantiate(enemyPrefab.GetElement(prefabName), new Vector3(col, 1, row), Quaternion.identity);
-                Map.matrixMap[row, col] = (int)ObjectType.Enemy;
+                Game.AddObjectToMap(gameObject, new Vector3(col, 1, row), ObjectType.Enemy);
                 currentCountOfEnemies++;
             }
         }

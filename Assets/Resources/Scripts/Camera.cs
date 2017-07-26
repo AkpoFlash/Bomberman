@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera : MonoBehaviour {
+public class Camera {
 
 	public Camera(GameObject camera) {
-        camera.transform.position = new Vector3(Map.col / 2, Map.GetMaxCoord(), Map.row / 5);
+        camera.transform.position = new Vector3(Game.col / 2, Game.GetMaxCoord(), Game.row / 5);
 	}
 
 }

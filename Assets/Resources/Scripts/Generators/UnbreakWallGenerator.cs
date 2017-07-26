@@ -5,18 +5,15 @@ using UnityEngine;
 public class UnbreakWallGenerator : EnvironmentGenerator
 {
 
-    public void Generate(string prefabName)
+    public override void Generate(GameObject gameObject)
     {
-        UnbreakWallLoader unbreakWallPrefab = new UnbreakWallLoader();
-
-        for (int i = 0; i < Map.row; i++)
+        for (int i = 0; i < Game.row; i++)
         {
-            for (int j = 0; j < Map.col; j++)
+            for (int j = 0; j < Game.col; j++)
             {
                 if (IsBounded(i, j) || IsEvenCell(i, j))
                 {
-                    Instantiate(unbreakWallPrefab.GetElement(prefabName), new Vector3(j, 0.5f, i), Quaternion.identity);
-                    Map.matrixMap[i, j] = (int)ObjectType.UnbreakWall;
+                    Game.AddObjectToMap(gameObject, new Vector3(j, 0.5f, i), ObjectType.UnbreakWall);
                 }
             }
         }

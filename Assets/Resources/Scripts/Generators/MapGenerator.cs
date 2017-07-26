@@ -6,17 +6,17 @@ public class MapGenerator {
 
     public MapGenerator(int rowCount, int colCount, int countOfBreakWall, int countOfEnemies)
     {
-        Map.row = rowCount;
-        Map.col = colCount;
-        Map.countOfBreakWall = countOfBreakWall;
-        Map.countOfEnemies = countOfEnemies;
-        Map.matrixMap = new int[rowCount, colCount];
+        Game.row = rowCount;
+        Game.col = colCount;
+        Game.countOfBreakWall = countOfBreakWall;
+        Game.countOfEnemies = countOfEnemies;
+        Game.matrixMap = new int[rowCount, colCount];
     }
 
     public void AddGround(GameObject gameObject)
     {
         GroundGenerator ground = new GroundGenerator();
-        ground.Generate(gameObject.name);
+        ground.Generate(gameObject);
     }
 
     public void AddBreakWall(GameObject gameObject, bool randomBreakWall = true)
@@ -24,27 +24,27 @@ public class MapGenerator {
         BreakWallGenerator breakWall = new BreakWallGenerator();
 
         if(randomBreakWall)
-            breakWall.GenerateRandom(gameObject.name);
+            breakWall.GenerateRandom(gameObject);
         else
-            breakWall.Generate(gameObject.name);
+            breakWall.Generate(gameObject);
     }
 
     public void AddUnbreakWall(GameObject gameObject)
     {
         UnbreakWallGenerator unbreakWall = new UnbreakWallGenerator();
-        unbreakWall.Generate(gameObject.name);
+        unbreakWall.Generate(gameObject);
     }
 
     public void AddPlayer(GameObject gameObject)
     {
         PlayerGenerator player = new PlayerGenerator();
-        player.Generate(gameObject.name);
+        player.Generate(gameObject);
     }
 
     public void AddEnemy(GameObject gameObject)
     {
         EnemyGenerator enemy = new EnemyGenerator();
-        enemy.Generate(gameObject.name);
+        enemy.Generate(gameObject);
     }
 
 }
