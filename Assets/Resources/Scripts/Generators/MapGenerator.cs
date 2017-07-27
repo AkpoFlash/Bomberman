@@ -37,12 +37,22 @@ public class MapGenerator {
 
     public void AddPlayer(GameObject gameObject)
     {
+        if (!gameObject.GetComponent<PlayerController>())
+        {
+            gameObject.AddComponent<PlayerController>();
+        }
+
         PlayerGenerator player = new PlayerGenerator();
         player.Generate(gameObject);
     }
 
     public void AddEnemy(GameObject gameObject)
     {
+        if (!gameObject.GetComponent<EnemyController>())
+        {
+            gameObject.AddComponent<EnemyController>();
+        }
+
         EnemyGenerator enemy = new EnemyGenerator();
         enemy.Generate(gameObject);
     }
