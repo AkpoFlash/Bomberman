@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour {
 
     public bool randomBreakWall = true;
 
-    private PlayerController playerCtrl;
-    private EnemyController enemyCtrl;
-
     void Start() {
         MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies);
         Camera camera = new Camera(mainCamera);
@@ -31,16 +28,14 @@ public class GameManager : MonoBehaviour {
         map.AddBreakWall(breakWallPrefab, randomBreakWall);
         map.AddPlayer(playerPrefab);
         map.AddEnemy(enemyPrefab);
-
-        playerCtrl = new PlayerController(playerPrefab, dinamicObjectSpeed);
-        enemyCtrl = new EnemyController(enemyPrefab, dinamicObjectSpeed);
     }
 
     void FixedUpdate()
     {
-        Time.fixedDeltaTime = 0.2f;
-        playerCtrl.Move();
-        enemyCtrl.Move();
+        //Time.fixedDeltaTime = 0.2f;
+        //IEnumerator step = playerCtrl.Move();
+        //StartCoroutine(step);
+        //enemyCtrl.Move();
     }
 
 }

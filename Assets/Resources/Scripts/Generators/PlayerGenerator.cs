@@ -6,21 +6,9 @@ public class PlayerGenerator : DinamicObjectGenerator {
 
     public GameObject GameObject { get; set; }
 
-    public override void Generate(GameObject gameObject)
+    protected override bool IsCellAvailable(int row, int col)
     {
-        System.Random randomValue = new System.Random();
-
-        while (true)
-        {
-            int row = randomValue.Next(1, Game.row);
-            int col = randomValue.Next(1, Game.col);
-
-            if (Game.matrixMap[row, col] == (int)ObjectType.Empty && CanSetPlayer(row, col))
-            {
-                Game.AddObjectToMap(gameObject, new Vector3(col, 1, row), ObjectType.Player);
-                break;
-            }
-        }
+        return base.IsCellAvailable(row, col) && CanSetPlayer(row, col);
     }
 
     private bool CanSetPlayer(int row, int col)
