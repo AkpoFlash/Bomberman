@@ -5,53 +5,101 @@ using UnityEngine;
 
 public class EnemyController : DinamicObjectController
 {
+    public int countOfNoRandomSteps = 50;
 
-    private Rigidbody[] enemiesRigidbody = new Rigidbody[Game.countOfEnemies];
-
-    public float Speed { get; set; }
-
-    private System.Random RandomValue { get; set; }
-
-
-    //public EnemyController(GameObject enemyObject, float speed)
-    //{
-    //    GameObject[] allEnemiesObject = GameObject.FindGameObjectsWithTag(enemyObject.tag);
-
-    //    for (int i = 0; i < allEnemiesObject.Length; i++)
-    //    {
-    //        this.enemiesRigidbody[i] = allEnemiesObject[i].GetComponent<Rigidbody>();
-    //    }
-
-    //    this.Speed = speed;
-    //    this.RandomValue = new System.Random();
-    //}
+    private Rigidbody enemyRigidbody;
+    private Vector3 step = new Vector3();
+    private System.Random RandomValue;
+    private int currentCountOfSteps;
 
     public override void Move()
     {
-        //foreach (var enemy in enemiesRigidbody)
-        //{
-        //    int direction = RandomValue.Next(0, 4);
+        if (currentCountOfSteps < countOfNoRandomSteps)
+        {
+            currentCountOfSteps++;
+        }
+        else
+        {
+            currentCountOfSteps = 0;
 
-        //    switch (direction)
-        //    {
-        //        // up
-        //        case 0:
-        //            this.SetMove(enemy, 0, 0, 1);
-        //            break;
-        //        // down
-        //        case 1:
-        //            this.SetMove(enemy, 0, 180, -1);
-        //            break;
-        //        // right
-        //        case 2:
-        //            this.SetMove(enemy, 1, 90, 0);
-        //            break;
-        //        // left
-        //        case 3:
-        //            this.SetMove(enemy, -1, 270, 0);
-        //            break;
-        //    }
-        //}
-
+            enemyRigidbody.transform.position = Round(enemyRigidbody.position);
+            step = GetRandomStep();
+        }
+        this.SetMove(enemyRigidbody, step.x, this.RotationByY(step.x, step.z), step.z);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag != "Ground")
+        {
+            Vector3 nextPosition = Round(gameObject.transform.position + step);
+            Vector3 collisionObjectPosition = Round(collision.gameObject.transform.position);
+
+            if (CanStepForward(collisionObjectPosition, nextPosition))
+            {
+                EndWalk();
+            }
+        }
+    }
+
+    private void Start()
+    {
+        this.enemyRigidbody = gameObject.GetComponent<Rigidbody>();
+        this.currentCountOfSteps = this.countOfNoRandomSteps;
+
+        this.Speed = Game.DinamicObjectSpeed;
+        this.RandomValue = new System.Random();
+    }
+
+    private void FixedUpdate()
+    {
+        this.Move();
+    }
+
+    private void EndWalk()
+    {
+        this.currentCountOfSteps = this.countOfNoRandomSteps;
+    }
+
+    private bool CanStepForward(Vector3 collisionObjectPosition, Vector3 nextPosition)
+    {
+        return collisionObjectPosition.x == nextPosition.x && collisionObjectPosition.z == nextPosition.z;
+    }
+
+    private Vector3 GetRandomStep()
+    {
+        Vector3 step = new Vector3();
+
+        switch (RandomValue.Next(0,4))
+        {
+            case 0:
+                step = Step(1,0);
+                break;
+            case 1:
+                step = Step(-1,0);
+                break;
+            case 2:
+                step = Step(0,-1);
+                break;
+            case 3:
+                step = Step(0,1);
+                break;
+        }
+
+        return step;
+    }
+
+    private Vector3 Step(int x, int z)
+    {
+        return new Vector3(x, 0, z);
+    }
+
 }

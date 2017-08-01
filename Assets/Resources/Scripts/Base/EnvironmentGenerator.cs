@@ -2,13 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class EnvironmentGenerator {
+public abstract class EnvironmentGenerator
+{
 
-    abstract public void Generate(GameObject gameObject);
+    protected abstract int StartCoordinate { get; }
+    protected abstract int EndCoordinate { get; }
+    protected abstract float PositionOnY { get; }
+
+    protected abstract ObjectType TypeOfObject { get; }
+
+    public virtual void Generate(GameObject gameObject)
+    {
+        for (int i = this.StartCoordinate; i < this.EndCoordinate; i++)
+        {
+            for (int j = this.StartCoordinate; j < this.EndCoordinate; j++)
+            {
+                if (this.IsCellAvailable(i, j))
+                {
+                    Game.AddObjectToMap(gameObject, new Vector3(j, this.PositionOnY, i), this.TypeOfObject);
+                }
+            }
+        }
+    }
+
+    protected abstract bool IsCellAvailable(int row, int col);
 
     protected bool IsBounded(int i, int j)
     {
-        return i == 0 || j == 0 || i == Game.row - 1 || j == Game.col - 1;
+        return i == 0 || j == 0 || i == Game.Row - 1 || j == Game.Col - 1;
     }
 
     protected bool IsEvenCell(int i, int j)

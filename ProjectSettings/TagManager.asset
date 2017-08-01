@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Break Wall
+  - Ground
+  - Unbreak Wall
+  - Bomb
+  - Explosion
   layers:
   - Default
   - TransparentFX
