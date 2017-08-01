@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
     public GameObject mainCamera;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public int colCount = 15;
     public int countOfBreakWall = 50;
     public int countOfEnemies = 3;
+    public int dinamicObjectSmooth = 20;
     public float dinamicObjectSpeed = 5;
 
     public GameObject groundPrefab;
@@ -20,22 +22,18 @@ public class GameManager : MonoBehaviour {
 
     public bool randomBreakWall = true;
 
-    void Start() {
+    private void Start() {
         MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies);
-        Camera camera = new Camera(mainCamera);
+        Camera.SetCamera(mainCamera);
+
         map.AddGround(groundPrefab);
         map.AddUnbreakWall(unbreakWallPrefab);
         map.AddBreakWall(breakWallPrefab, randomBreakWall);
         map.AddPlayer(playerPrefab);
         map.AddEnemy(enemyPrefab);
-    }
 
-    void FixedUpdate()
-    {
-        //Time.fixedDeltaTime = 0.2f;
-        //IEnumerator step = playerCtrl.Move();
-        //StartCoroutine(step);
-        //enemyCtrl.Move();
+        Game.DinamicObjectSpeed = this.dinamicObjectSpeed;
+        Game.DinamicObjectSmooth = this.dinamicObjectSmooth;
     }
 
 }

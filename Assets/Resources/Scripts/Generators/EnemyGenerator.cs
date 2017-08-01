@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class EnemyGenerator : DinamicObjectGenerator {
 
-    protected override int CountOfObjects { get { return Game.countOfEnemies; }}
+    protected override int CountOfObjects { get { return Game.CountOfEnemies; }}
+
+    protected override ObjectType TypeOfObject { get { return ObjectType.Enemy; } }
+
 }

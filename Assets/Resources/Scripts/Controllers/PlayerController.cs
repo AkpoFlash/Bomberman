@@ -5,28 +5,48 @@ using UnityEngine;
 
 public class PlayerController : DinamicObjectController
 {
+    public GameObject bombPrefab;
+    public int countOfBombs = 1;
 
     private Rigidbody PlayerRigidbody { get; set; }
 
-    //public PlayerController(GameObject playerObject, float speed)
-    //{
-    //    this.PlayerRigidbody = GameObject.FindWithTag(playerObject.tag).GetComponent<Rigidbody>();
-    //    this.Speed = speed;
-    //}
-
     public override void Move()
     {
-        this.PlayerRigidbody = gameObject.GetComponent<Rigidbody>();
-        this.Speed = 5;
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+        float moveX = 0;
+        float moveZ = 0;
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        if(Mathf.Abs(x) > Mathf.Abs(z))
+            moveX = x;
+        else
+            moveZ = z;
 
-        this.SetMove(PlayerRigidbody, x, GetRotationByY(x, z), z);
+        this.SetMove(this.PlayerRigidbody, moveX, this.RotationByY(moveX, moveZ), moveZ);
     }
 
-    void FixedUpdate()
+    private void Start()
     {
-        Move();
+        this.Speed = Game.DinamicObjectSpeed;
+        this.PlayerRigidbody = gameObject.GetComponent<Rigidbody>();
     }
+
+    private void FixedUpdate()
+    {
+        this.Move();
+
+        if (Input.GetKeyDown("space"))
+        {
+            float x = Mathf.Round(gameObject.transform.position.x);
+            float z = Mathf.Round(gameObject.transform.position.z);
+
+            Game.AddObjectToMap(bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.isTrigger = false;
+    }
+
 }
