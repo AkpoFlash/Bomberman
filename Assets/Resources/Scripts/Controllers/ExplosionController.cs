@@ -5,8 +5,6 @@ using UnityEngine;
 public class ExplosionController : MonoBehaviour
 {
 
-    public int countOfExplosions = 2;
-
     public float secondsToDisappear = 0.3f;
 
     private void Start ()

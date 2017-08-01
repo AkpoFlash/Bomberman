@@ -31,10 +31,10 @@ public static class Game
         return randomValue.NextDouble() < probabilityAppearance;
     }
 
-    public static void AddObjectToMap(GameObject gameObject, Vector3 position, ObjectType objectType)
+    public static GameObject AddObjectToMap(GameObject gameObject, Vector3 position, ObjectType objectType)
     {
-        MonoBehaviour.Instantiate(gameObject, position, Quaternion.identity);
         Game.MatrixMap[(int)position.z, (int)position.x] = (int)objectType;
+        return MonoBehaviour.Instantiate(gameObject, position, Quaternion.identity);
     }
 
 }
