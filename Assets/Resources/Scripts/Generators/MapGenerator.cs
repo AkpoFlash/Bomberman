@@ -21,12 +21,19 @@ public class MapGenerator {
 
     public void AddBreakWall(GameObject gameObject, bool randomBreakWall = true)
     {
-        BreakWallGenerator breakWall = new BreakWallGenerator();
 
-        if(randomBreakWall)
-            breakWall.GenerateRandom(gameObject);
-        else
+
+        if (randomBreakWall)
+        {
+            BreakWallRandomGenerator breakWall = new BreakWallRandomGenerator();
             breakWall.Generate(gameObject);
+        }
+        else
+        {
+            BreakWallGenerator breakWall = new BreakWallGenerator();
+            breakWall.Generate(gameObject);
+        }
+            
     }
 
     public void AddUnbreakWall(GameObject gameObject)

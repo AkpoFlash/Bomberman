@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerController : DinamicObjectController
 {
     public GameObject bombPrefab;
-    public int countOfBombs = 1;
+    public int maxCountOfBombs = 1;
 
     private Rigidbody PlayerRigidbody { get; set; }
+
+    private List<GameObject> playersBomb = new List<GameObject>();
 
     public override void Move()
     {
@@ -35,18 +37,44 @@ public class PlayerController : DinamicObjectController
     {
         this.Move();
 
+        this.RemoveExplodedBombs();
+
         if (Input.GetKeyDown("space"))
         {
-            float x = Mathf.Round(gameObject.transform.position.x);
-            float z = Mathf.Round(gameObject.transform.position.z);
-
-            Game.AddObjectToMap(bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb);
+            if (CanPutBomb())
+            {
+                PutBomb();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         other.isTrigger = false;
+    }
+
+    private void RemoveExplodedBombs()
+    {
+        foreach (var bomb in this.playersBomb.ToArray())
+        {
+            if (bomb == null)
+            {
+                this.playersBomb.Remove(bomb);
+            }
+        }
+    }
+
+    private void PutBomb()
+    {
+        float x = Mathf.Round(gameObject.transform.position.x);
+        float z = Mathf.Round(gameObject.transform.position.z);
+
+        this.playersBomb.Add(Game.AddObjectToMap(this.bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb));
+    }
+
+    private bool CanPutBomb()
+    {
+        return playersBomb.Count < this.maxCountOfBombs;
     }
 
 }
