@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -82,8 +80,6 @@
   <ItemGroup>
     <Compile Include="Assets\Resources\Scripts\Base\DinamicObjectController.cs" />
     <Compile Include="Assets\Resources\Scripts\Base\DinamicObjectGenerator.cs" />
-    <Compile Include="Assets\Resources\Scripts\Controllers\PowerUpController.cs" />
-    <Compile Include="Assets\Resources\Scripts\Generators\PowerUpGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Base\EnvironmentGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Common\Camera.cs" />
     <Compile Include="Assets\Resources\Scripts\Common\Game.cs" />
@@ -92,13 +88,16 @@
     <Compile Include="Assets\Resources\Scripts\Controllers\EnemyController.cs" />
     <Compile Include="Assets\Resources\Scripts\Controllers\ExplosionController.cs" />
     <Compile Include="Assets\Resources\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Resources\Scripts\Controllers\PowerUpController.cs" />
     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\BreakWallGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\BreakWallRandomGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\EnemyGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\GroundGenerator.cs" />
+    <Compile Include="Assets\Resources\Scripts\Generators\GUIGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\MapGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\PlayerGenerator.cs" />
+    <Compile Include="Assets\Resources\Scripts\Generators\PowerUpGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\UnbreakWallGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

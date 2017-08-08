@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+
 
 public class PlayerController : DinamicObjectController
 {
@@ -151,6 +153,9 @@ public class PlayerController : DinamicObjectController
     private void PickUpPowerUp(GameObject gameObject, string name, string levelPowerUp)
     {
         //StopCoroutine(ClearMessage());
+        AudioSource audioEffect = gameObject.GetComponent<AudioSource>();
+        audioEffect.Play();
+
         this.messageText.text = String.Format("Pick up {0} power up ({1})", name, levelPowerUp);
         Animate(gameObject, 0, 3, 0);
         StartCoroutine(ClearMessage());
