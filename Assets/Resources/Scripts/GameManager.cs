@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject unbreakWallPrefab;
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
+    public GameObject[] powerUpPrefab;
 
     public bool randomBreakWall = true;
 
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         map.AddBreakWall(breakWallPrefab, randomBreakWall);
         map.AddPlayer(playerPrefab);
         map.AddEnemy(enemyPrefab);
+        map.AddPowerUp(powerUpPrefab);
 
         Game.DinamicObjectSpeed = this.dinamicObjectSpeed;
         Game.DinamicObjectSmooth = this.dinamicObjectSmooth;

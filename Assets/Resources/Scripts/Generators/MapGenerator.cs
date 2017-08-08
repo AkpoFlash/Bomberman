@@ -54,4 +54,10 @@ public class MapGenerator {
         enemy.Generate(gameObject);
     }
 
+    public void AddPowerUp(GameObject[] gameObject)
+    {
+        PowerUpGenerator powerUp = new PowerUpGenerator();
+        powerUp.Generate(gameObject);
+    }
+
 }

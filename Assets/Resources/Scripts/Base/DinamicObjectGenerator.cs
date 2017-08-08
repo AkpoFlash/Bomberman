@@ -21,7 +21,7 @@ public abstract class DinamicObjectGenerator
 
             if (IsCellAvailable(row, col))
             {
-                Game.AddObjectToMap(gameObject, new Vector3(col, 1, row), TypeOfObject);
+                Game.AddObjectToMap(gameObject, new Vector3(col, 0, row), TypeOfObject);
                 currentCountOfObject++;
             }
         }
