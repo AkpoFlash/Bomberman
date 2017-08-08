@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : DinamicObjectController
 {
@@ -12,6 +13,7 @@ public class PlayerController : DinamicObjectController
 
     private Rigidbody PlayerRigidbody { get; set; }
     private Animator animator;
+    private Text messageText;
     private List<GameObject> playersBomb = new List<GameObject>();
 
     public override void Move()
@@ -42,7 +44,9 @@ public class PlayerController : DinamicObjectController
     {
         this.Speed = Game.DinamicObjectSpeed;
         this.PlayerRigidbody = gameObject.GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+
+        this.animator = GetComponent<Animator>();
+        this.messageText = Game.GUI.GetComponentInChildren<Text>();
     }
 
     private void FixedUpdate()
@@ -79,32 +83,33 @@ public class PlayerController : DinamicObjectController
     {
         int row = (int)other.gameObject.transform.position.z;
         int col = (int)other.gameObject.transform.position.x;
+
         if (Game.MatrixMap[row, col] != (int)ObjectType.BreakWall)
         {
             switch (other.gameObject.tag)
             {
                 case "BombPowerUp":
-                    maxCountOfBombs++;
-                    Destroy(other.gameObject);
+                    this.maxCountOfBombs++;
+                    PickUpPowerUp(other.gameObject, "BOMBS", this.maxCountOfBombs.ToString());
                     break;
                 case "ExplosionPowerUp":
                     this.countOfExplosions++;
-                    Destroy(other.gameObject);
+                    PickUpPowerUp(other.gameObject, "EXPLOSION", this.countOfExplosions.ToString());
                     break;
                 case "SpeedPowerUp":
                     this.Speed++;
-                    Destroy(other.gameObject);
+                    PickUpPowerUp(other.gameObject, "SPEED", this.Speed.ToString());
                     break;
                 case "WallHackPowerUp":
-                    if (!wallHack)
+                    if (!this.wallHack)
                     {
                         foreach (GameObject breakWall in GameObject.FindGameObjectsWithTag("Break Wall"))
                         {
                             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), breakWall.GetComponent<Collider>());
                         }
-                        wallHack = true;
+                        this.wallHack = true;
                     }
-                    Destroy(other.gameObject);
+                    PickUpPowerUp(other.gameObject, "WALL HACK", this.wallHack.ToString());
                     break;
             }
         }
@@ -135,6 +140,38 @@ public class PlayerController : DinamicObjectController
         return Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.BreakWall
             && Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.Bomb
             && playersBomb.Count < this.maxCountOfBombs;
+    }
+
+    private IEnumerator ClearMessage()
+    {
+        yield return new WaitForSeconds(2f);
+        this.messageText.text = "";
+    }
+
+    private void PickUpPowerUp(GameObject gameObject, string name, string levelPowerUp)
+    {
+        //StopCoroutine(ClearMessage());
+        this.messageText.text = String.Format("Pick up {0} power up ({1})", name, levelPowerUp);
+        Animate(gameObject, 0, 3, 0);
+        StartCoroutine(ClearMessage());
+    }
+
+    private void Animate(GameObject gameObject, float x, float y, float z)
+    {
+        Vector3 start = gameObject.transform.position;
+        Vector3 end = gameObject.transform.position + new Vector3(x, y, z);
+        StartCoroutine(GetStep(gameObject, start, end));
+    }
+
+    private IEnumerator GetStep(GameObject gameObject, Vector3 start, Vector3 end)
+    {
+        Vector3 diff = end - start;
+        for (int i = 0; i < Game.DinamicObjectSmooth; i++)
+        {
+            gameObject.transform.position += (diff / Game.DinamicObjectSmooth);
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(gameObject);
     }
 
 }
