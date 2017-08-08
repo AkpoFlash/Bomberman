@@ -10,6 +10,10 @@ TagManager:
   - Unbreak Wall
   - Bomb
   - Explosion
+  - BombPowerUp
+  - SpeedPowerUp
+  - WallHackPowerUp
+  - ExplosionPowerUp
   layers:
   - Default
   - TransparentFX

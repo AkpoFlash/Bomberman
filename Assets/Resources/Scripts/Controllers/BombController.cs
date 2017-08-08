@@ -6,8 +6,8 @@ public class BombController : MonoBehaviour
 {
 
     public GameObject explosionPrefab;
-    public int countOfExplosions = 2;
-    public float secondsToExplosion = 4;
+    public int countOfExplosions;
+    public float secondsToExplosion = 3;
 
     private Dictionary<Vector3, bool> explosionDirection = new Dictionary<Vector3, bool>();
 
@@ -27,6 +27,7 @@ public class BombController : MonoBehaviour
         float x = Mathf.Round(gameObject.transform.position.x);
         float z = Mathf.Round(gameObject.transform.position.z);
 
+        gameObject.transform.localScale = new Vector3(0,0,0);
         this.explosionDirection.Add(new Vector3(x, 0.5f, z), StepForward(new Vector3(x, 0.5f, z)));
 
         for (int i = 1; i <= this.countOfExplosions; i++)

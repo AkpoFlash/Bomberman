@@ -6,16 +6,17 @@ public abstract class EnvironmentGenerator
 {
 
     protected abstract int StartCoordinate { get; }
-    protected abstract int EndCoordinate { get; }
+    protected abstract int MaxRowCoordinate { get; }
+    protected abstract int MaxColCoordinate { get; }
     protected abstract float PositionOnY { get; }
 
     protected abstract ObjectType TypeOfObject { get; }
 
     public virtual void Generate(GameObject gameObject)
     {
-        for (int i = this.StartCoordinate; i < this.EndCoordinate; i++)
+        for (int i = this.StartCoordinate; i < this.MaxRowCoordinate; i++)
         {
-            for (int j = this.StartCoordinate; j < this.EndCoordinate; j++)
+            for (int j = this.StartCoordinate; j < this.MaxColCoordinate; j++)
             {
                 if (this.IsCellAvailable(i, j))
                 {

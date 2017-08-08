@@ -7,7 +7,8 @@ public class BreakWallRandomGenerator : EnvironmentGenerator
 {
 
     protected override int StartCoordinate { get { return 1; } }
-    protected override int EndCoordinate { get { return Game.Row - 1; } }
+    protected override int MaxRowCoordinate { get { return Game.Row - 1; } }
+    protected override int MaxColCoordinate { get { return Game.Col - 1; } }
     protected override float PositionOnY { get { return 0.5f; } }
     protected override ObjectType TypeOfObject { get { return ObjectType.BreakWall; } }
 

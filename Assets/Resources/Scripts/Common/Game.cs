@@ -19,6 +19,8 @@ public static class Game
 
     public static double probabilityAppearanceBreakWall = 0.3;
 
+    public static double probabilityAppearancePowerUp = 0.5;
+
     public static int[,] MatrixMap { get; set; }
 
     public static int GetMaxCoord()

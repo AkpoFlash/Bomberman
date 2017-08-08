@@ -9,8 +9,9 @@ public class EnemyController : DinamicObjectController
 
     private Rigidbody enemyRigidbody;
     private Vector3 step = new Vector3();
-    private System.Random RandomValue;
+    private System.Random randomValue;
     private int currentCountOfSteps;
+    private Animator animator;
 
     public override void Move()
     {
@@ -25,6 +26,8 @@ public class EnemyController : DinamicObjectController
             enemyRigidbody.transform.position = Round(enemyRigidbody.position);
             step = GetRandomStep();
         }
+
+        this.animator.Play("Run");
         this.SetMove(enemyRigidbody, step.x, this.RotationByY(step.x, step.z), step.z);
     }
 
@@ -32,7 +35,8 @@ public class EnemyController : DinamicObjectController
     {
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            //this.animator.Play("Attack");
+            //Destroy(collision.gameObject);
         }
     }
 
@@ -56,7 +60,8 @@ public class EnemyController : DinamicObjectController
         this.currentCountOfSteps = this.countOfNoRandomSteps;
 
         this.Speed = Game.DinamicObjectSpeed;
-        this.RandomValue = new System.Random();
+        this.randomValue = new System.Random();
+        this.animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -78,7 +83,7 @@ public class EnemyController : DinamicObjectController
     {
         Vector3 step = new Vector3();
 
-        switch (RandomValue.Next(0,4))
+        switch (randomValue.Next(0,4))
         {
             case 0:
                 step = Step(1,0);

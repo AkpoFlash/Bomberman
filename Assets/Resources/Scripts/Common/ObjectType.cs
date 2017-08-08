@@ -10,4 +10,5 @@ public enum ObjectType {
     Enemy = 4,
     Bomb = 5,
     Explosion = 6,
+    PowerUp = 7,
 }
