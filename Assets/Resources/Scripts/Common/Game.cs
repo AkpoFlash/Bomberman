@@ -23,6 +23,8 @@ public static class Game
 
     public static int[,] MatrixMap { get; set; }
 
+    public static GameObject GUI = new GameObject();
+
     public static int GetMaxCoord()
     {
         return (Row < Col) ? Col : Row;

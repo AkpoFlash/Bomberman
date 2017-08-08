@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int dinamicObjectSmooth = 20;
     public float dinamicObjectSpeed = 5;
 
+    public GameObject GUI;
     public GameObject groundPrefab;
     public GameObject breakWallPrefab;
     public GameObject unbreakWallPrefab;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] powerUpPrefab;
 
     public bool randomBreakWall = true;
+
 
     private void Start() {
         MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies);
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
         map.AddPlayer(playerPrefab);
         map.AddEnemy(enemyPrefab);
         map.AddPowerUp(powerUpPrefab);
+        map.AddGUI(GUI);
 
         Game.DinamicObjectSpeed = this.dinamicObjectSpeed;
         Game.DinamicObjectSmooth = this.dinamicObjectSmooth;

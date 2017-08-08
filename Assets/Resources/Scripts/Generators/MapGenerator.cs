@@ -60,4 +60,10 @@ public class MapGenerator {
         powerUp.Generate(gameObject);
     }
 
+    public void AddGUI(GameObject gameObject)
+    {
+        GUIGenerator gui = new GUIGenerator();
+        gui.Generate(gameObject);
+    }
+
 }
