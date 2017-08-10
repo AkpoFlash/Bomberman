@@ -10,13 +10,13 @@ public class PathNode
 
     public PathNode CameFrom { get; set; }
 
-    public int HeuristicEstimatePathLength { get; set; }
+    public int ApproximatePathLength { get; set; }
 
-    public int EstimateFullPathLength
+    public int ExpectedPathLength
     {
         get
         {
-            return this.PathLengthFromStart + this.HeuristicEstimatePathLength;
+            return this.PathLengthFromStart + this.ApproximatePathLength;
         }
     }
 }
