@@ -289,8 +289,8 @@ MonoBehaviour:
   mainCamera: {fileID: 585911366}
   rowCount: 15
   colCount: 15
-  countOfBreakWall: 50
-  countOfEnemies: 2
+  countOfBreakWall: 0
+  countOfEnemies: 1
   dinamicObjectSmooth: 10
   dinamicObjectSpeed: 3
   GUI: {fileID: 1708107002435456, guid: 52d862cfc4d687c42addde3642544318, type: 2}
