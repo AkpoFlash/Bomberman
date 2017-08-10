@@ -230,9 +230,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4116104042502942}
   - component: {fileID: 95070656015414442}
-  - component: {fileID: 114929084907689282}
   - component: {fileID: 54665895859518964}
   - component: {fileID: 136069451725165598}
+  - component: {fileID: 114806302258438418}
   m_Layer: 0
   m_Name: SkeletEnemy
   m_TagString: Enemy
@@ -831,7 +831,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114929084907689282
+--- !u!114 &114806302258438418
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -839,10 +839,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1701535804183864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17024b52b810d154ea9bacd3cb037279, type: 3}
+  m_Script: {fileID: 11500000, guid: 8aea5f641b3ff6a4dbc8d1f17c9dd84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countOfNoRandomSteps: 50
 --- !u!136 &136069451725165598
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -865,6 +864,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -880,6 +880,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
