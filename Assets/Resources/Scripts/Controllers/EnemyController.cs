@@ -15,7 +15,6 @@ public class EnemyController : DinamicObjectController
 
     public override void Move()
     {
-        this.animator.Play("Run");
         this.SetMove(this.enemyRigidbody, this.step.x, this.RotationByY(this.step.x, this.step.z), this.step.z);
     }
 
@@ -76,7 +75,8 @@ public class EnemyController : DinamicObjectController
     {
         if (collision.gameObject.tag == "Player")
         {
-            //this.animator.Play("Attack");
+            this.animator.SetTrigger("Attack");
+            this.step = new Vector3(0,0,0);
             //Destroy(collision.gameObject);
         }
     }
@@ -109,6 +109,11 @@ public class EnemyController : DinamicObjectController
     {
         this.RandomStep();
         this.Move();
+    }
+
+    private IEnumerator SetTimeOut(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 
 }

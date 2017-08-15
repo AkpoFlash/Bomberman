@@ -845,7 +845,6 @@ MonoBehaviour:
   bombPrefab: {fileID: 1850737878576208, guid: 9bc626a57659f4a4ea6160a638cb7557, type: 2}
   maxCountOfBombs: 1
   countOfExplosions: 2
-  wallHack: 0
 --- !u!136 &136693908336185196
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -868,6 +867,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -883,6 +883,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

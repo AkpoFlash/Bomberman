@@ -11,9 +11,9 @@ public class PlayerController : DinamicObjectController
     public GameObject bombPrefab;
     public int maxCountOfBombs = 1;
     public int countOfExplosions = 1;
-    public bool wallHack = false;
 
     private Rigidbody PlayerRigidbody { get; set; }
+    private bool wallHack = false;
     private Animator animator;
     private Text messageText;
     private List<GameObject> playersBomb = new List<GameObject>();
@@ -32,17 +32,17 @@ public class PlayerController : DinamicObjectController
 
         if (moveX == 0 && moveZ == 0)
         {
-            this.animator.Play("Stand");
+            this.animator.SetFloat("Speed",0);
         }
         else
         {
-            if(this.Speed > Game.DinamicObjectSpeed)
+            if (this.Speed > Game.DinamicObjectSpeed)
             {
-                this.animator.Play("Run");
+                this.animator.SetFloat("Speed",2);
             }
             else
             {
-                this.animator.Play("Walk");
+                this.animator.SetFloat("Speed",1);
             }
         }
 
@@ -73,6 +73,16 @@ public class PlayerController : DinamicObjectController
             {
                 this.PutBomb(x,z);
             }
+        }
+    }
+
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            this.animator.SetTrigger("Killed");
+            gameObject.GetComponent<Collider>().isTrigger = true;
+            Destroy(gameObject,2);
         }
     }
 
@@ -140,7 +150,7 @@ public class PlayerController : DinamicObjectController
         GameObject bomb = Game.AddObjectToMap(this.bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb);
         BombController bombController = bomb.GetComponent<BombController>();
         bombController.countOfExplosions = this.countOfExplosions;
-
+        this.animator.SetTrigger("SetBomb");
         this.playersBomb.Add(bomb);
     }
 
