@@ -299,7 +299,8 @@ MonoBehaviour:
   rowCount: 15
   colCount: 15
   countOfBreakWall: 50
-  countOfEnemies: 1
+  countOfEnemies: 3
+  countOfProEnemies: 1
   dinamicObjectSmooth: 10
   dinamicObjectSpeed: 3
   GUI: {fileID: 1708107002435456, guid: 52d862cfc4d687c42addde3642544318, type: 2}
@@ -312,6 +313,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 1682498718985240, guid: 004c26841f1c8b9479d4893eca1fea57,
     type: 2}
   enemyPrefab: {fileID: 1701535804183864, guid: 755de43da66291549bff54bea0fa0dce,
+    type: 2}
+  enemyProPrefab: {fileID: 1010855334267990, guid: 33c8888ad5c1d094e9587e410785beba,
     type: 2}
   powerUpPrefab:
   - {fileID: 1005218877521366, guid: 1db584ee711fcc64e95fd6f0084e0031, type: 2}

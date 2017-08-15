@@ -8,8 +8,8 @@ public static class AStar
 {
     public static List<Vector3> FindPath(int[,] field, Vector3 start, Vector3 end)
     {
-        var closedSet = new List<PathNode>();
-        var openSet = new List<PathNode>();
+        List<PathNode> closedSet = new List<PathNode>();
+        List<PathNode> openSet = new List<PathNode>();
 
         PathNode startNode = new PathNode()
         {
@@ -23,7 +23,7 @@ public static class AStar
 
         while (openSet.Count > 0)
         {
-            var currentNode = openSet.OrderBy(node =>
+            PathNode currentNode = openSet.OrderBy(node =>
               node.ExpectedPathLength).First();
 
             if (currentNode.Position == end)
@@ -34,20 +34,20 @@ public static class AStar
 
             foreach (var neighbourNode in GetNeighbours(currentNode, end, field))
             {
-                if (closedSet.Count(node => node.Position == neighbourNode.Position) > 0)
-                    continue;
-
-                var openNode = openSet.FirstOrDefault(node =>
+                if (closedSet.Count(node => node.Position == neighbourNode.Position) == 0)
+                {
+                    PathNode openNode = openSet.FirstOrDefault(node =>
                     node.Position == neighbourNode.Position);
 
-                if (openNode == null)
-                    openSet.Add(neighbourNode);
-                else
-                    if (openNode.PathLengthFromStart > neighbourNode.PathLengthFromStart)
-                    {
-                        openNode.CameFrom = currentNode;
-                        openNode.PathLengthFromStart = neighbourNode.PathLengthFromStart;
-                    }
+                    if (openNode == null)
+                        openSet.Add(neighbourNode);
+                    else
+                        if (openNode.PathLengthFromStart > neighbourNode.PathLengthFromStart)
+                        {
+                            openNode.CameFrom = currentNode;
+                            openNode.PathLengthFromStart = neighbourNode.PathLengthFromStart;
+                        }
+                }
             }
         }
         return null;
@@ -60,7 +60,7 @@ public static class AStar
 
     private static List<PathNode> GetNeighbours(PathNode pathNode, Vector3 goal, int[,] field)
     {
-        var result = new List<PathNode>();
+        List<PathNode> result = new List<PathNode>();
 
         Vector3[] neighbourPoints = new Vector3[4];
         neighbourPoints[0] = new Vector3(pathNode.Position.x + 1, 0, pathNode.Position.z);
@@ -70,30 +70,25 @@ public static class AStar
 
         foreach (var point in neighbourPoints)
         {
-            if (point.x < 0 || point.x >= field.GetLength(1))
-                continue;
-            if (point.z < 0 || point.z >= field.GetLength(0))
-                continue;
-
-            if (field[(int)point.z, (int)point.x] == 1)
-                continue;
-
-            var neighbourNode = new PathNode()
+            if (CanMove(point, field))
             {
-                Position = point,
-                CameFrom = pathNode,
-                PathLengthFromStart = pathNode.PathLengthFromStart + 1,
-                ApproximatePathLength = GetApproximatePathLength(point, goal)
-            };
-            result.Add(neighbourNode);
+                PathNode neighbourNode = new PathNode()
+                {
+                    Position = point,
+                    CameFrom = pathNode,
+                    PathLengthFromStart = pathNode.PathLengthFromStart + 1,
+                    ApproximatePathLength = GetApproximatePathLength(point, goal)
+                };
+                result.Add(neighbourNode);
+            }
         }
         return result;
     }
 
     private static List<Vector3> GetPathForNode(PathNode pathNode)
     {
-        var result = new List<Vector3>();
-        var currentNode = pathNode;
+        List<Vector3> result = new List<Vector3>();
+        PathNode currentNode = pathNode;
         while (currentNode != null)
         {
             result.Add(currentNode.Position);
@@ -102,4 +97,12 @@ public static class AStar
         result.Reverse();
         return result;
     }
+
+    private static bool CanMove(Vector3 point, int[,] field)
+    {
+        return (point.x >= 0 || point.x < field.GetLength(1))
+            && (point.z >= 0 || point.z < field.GetLength(0))
+            && (field[(int)point.z, (int)point.x] != 1);
+    }
+
 }

@@ -13,6 +13,8 @@ public static class Game
 
     public static int CountOfEnemies { get; set; }
 
+    public static int CountOfProEnemies { get; set; }
+
     public static int DinamicObjectSmooth { get; set; }
 
     public static float DinamicObjectSpeed { get; set; }
