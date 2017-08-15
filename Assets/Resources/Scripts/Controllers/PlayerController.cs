@@ -32,11 +32,18 @@ public class PlayerController : DinamicObjectController
 
         if (moveX == 0 && moveZ == 0)
         {
-            animator.Play("Stand");
+            this.animator.Play("Stand");
         }
         else
         {
-            animator.Play("Run");
+            if(this.Speed > Game.DinamicObjectSpeed)
+            {
+                this.animator.Play("Run");
+            }
+            else
+            {
+                this.animator.Play("Walk");
+            }
         }
 
         this.SetMove(this.PlayerRigidbody, moveX, this.RotationByY(moveX, moveZ), moveZ);
@@ -62,9 +69,9 @@ public class PlayerController : DinamicObjectController
             float x = Mathf.Round(gameObject.transform.position.x);
             float z = Mathf.Round(gameObject.transform.position.z);
 
-            if (CanPutBomb(x,z))
+            if (this.CanPutBomb(x,z))
             {
-                PutBomb(x,z);
+                this.PutBomb(x,z);
             }
         }
     }
@@ -92,15 +99,15 @@ public class PlayerController : DinamicObjectController
             {
                 case "BombPowerUp":
                     this.maxCountOfBombs++;
-                    PickUpPowerUp(other.gameObject, "BOMBS", this.maxCountOfBombs.ToString());
+                    this.PickUpPowerUp(other.gameObject, "BOMBS", this.maxCountOfBombs.ToString());
                     break;
                 case "ExplosionPowerUp":
                     this.countOfExplosions++;
-                    PickUpPowerUp(other.gameObject, "EXPLOSION", this.countOfExplosions.ToString());
+                    this.PickUpPowerUp(other.gameObject, "EXPLOSION", this.countOfExplosions.ToString());
                     break;
                 case "SpeedPowerUp":
                     this.Speed++;
-                    PickUpPowerUp(other.gameObject, "SPEED", this.Speed.ToString());
+                    this.PickUpPowerUp(other.gameObject, "SPEED", this.Speed.ToString());
                     break;
                 case "WallHackPowerUp":
                     if (!this.wallHack)
@@ -111,7 +118,7 @@ public class PlayerController : DinamicObjectController
                         }
                         this.wallHack = true;
                     }
-                    PickUpPowerUp(other.gameObject, "WALL HACK", this.wallHack.ToString());
+                    this.PickUpPowerUp(other.gameObject, "WALL HACK", this.wallHack.ToString());
                     break;
             }
         }
@@ -141,7 +148,7 @@ public class PlayerController : DinamicObjectController
     {
         return Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.BreakWall
             && Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.Bomb
-            && playersBomb.Count < this.maxCountOfBombs;
+            && this.playersBomb.Count < this.maxCountOfBombs;
     }
 
     private IEnumerator ClearMessage()
@@ -157,7 +164,7 @@ public class PlayerController : DinamicObjectController
         audioEffect.Play();
 
         this.messageText.text = String.Format("Pick up {0} power up ({1})", name, levelPowerUp);
-        Animate(gameObject, 0, 3, 0);
+        this.Animate(gameObject, 0, 3, 0);
         StartCoroutine(ClearMessage());
     }
 

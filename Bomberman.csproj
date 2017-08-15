@@ -96,6 +96,7 @@
     <Compile Include="Assets\Resources\Scripts\Generators\BreakWallGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\BreakWallRandomGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\EnemyGenerator.cs" />
+    <Compile Include="Assets\Resources\Scripts\Generators\EnemyProGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\GroundGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\GUIGenerator.cs" />
     <Compile Include="Assets\Resources\Scripts\Generators\MapGenerator.cs" />

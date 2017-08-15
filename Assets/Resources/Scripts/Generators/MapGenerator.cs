@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MapGenerator {
 
-    public MapGenerator(int rowCount, int colCount, int countOfBreakWall, int countOfEnemies)
+    public MapGenerator(int rowCount, int colCount, int countOfBreakWall, int countOfEnemies, int countOfProEnemies)
     {
         Game.Row = rowCount;
         Game.Col = colCount;
         Game.CountOfBreakWall = countOfBreakWall;
         Game.CountOfEnemies = countOfEnemies;
+        Game.CountOfProEnemies = countOfProEnemies;
         Game.MatrixMap = new int[rowCount, colCount];
     }
 
@@ -52,6 +53,12 @@ public class MapGenerator {
     {
         EnemyGenerator enemy = new EnemyGenerator();
         enemy.Generate(gameObject);
+    }
+
+    public void AddProEnemy(GameObject gameObject)
+    {
+        EnemyProGenerator enemyPro = new EnemyProGenerator();
+        enemyPro.Generate(gameObject);
     }
 
     public void AddPowerUp(GameObject[] gameObject)

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int colCount = 15;
     public int countOfBreakWall = 50;
     public int countOfEnemies = 3;
+    public int countOfProEnemies = 1;
     public int dinamicObjectSmooth = 20;
     public float dinamicObjectSpeed = 5;
 
@@ -20,13 +21,14 @@ public class GameManager : MonoBehaviour
     public GameObject unbreakWallPrefab;
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
+    public GameObject enemyProPrefab;
     public GameObject[] powerUpPrefab;
 
     public bool randomBreakWall = true;
 
 
     private void Start() {
-        MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies);
+        MapGenerator map = new MapGenerator(rowCount, colCount, countOfBreakWall, countOfEnemies, countOfProEnemies);
         Camera.SetCamera(mainCamera);
 
         map.AddGround(groundPrefab);
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         map.AddBreakWall(breakWallPrefab, randomBreakWall);
         map.AddPlayer(playerPrefab);
         map.AddEnemy(enemyPrefab);
+        map.AddProEnemy(enemyProPrefab);
         map.AddPowerUp(powerUpPrefab);
         map.AddGUI(GUI);
 
