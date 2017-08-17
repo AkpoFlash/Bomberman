@@ -4,11 +4,15 @@ using UnityEngine;
 
 public abstract class DinamicObjectController : MonoBehaviour
 {
-    protected bool canMove = true;
+    public AudioClip soundOfStep;
+    public AudioClip soundOfDeath;
     public float Speed { get; set; }
     public abstract void Move();
 
     protected float Rotation { get; set; }
+    protected bool canMove = true;
+    protected AudioSource audioEffect;
+
 
     protected void SetMove(Rigidbody rigidBody, float x, float y, float z)
     {
@@ -58,11 +62,23 @@ public abstract class DinamicObjectController : MonoBehaviour
         return new Vector3(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y), Mathf.RoundToInt(vector.z));
     }
 
-    protected IEnumerator SetTimeout(float seconds)
+    protected IEnumerator SetMoveTimeout(float seconds)
     {
         this.canMove = false;
         yield return new WaitForSeconds(seconds);
         this.canMove = true;
+    }
+
+    protected void PlayStepSound()
+    {
+        audioEffect.clip = soundOfStep;
+        audioEffect.Play();
+    }
+
+    protected void PlayDeathSound()
+    {
+        audioEffect.clip = soundOfDeath;
+        audioEffect.Play();
     }
 
 }

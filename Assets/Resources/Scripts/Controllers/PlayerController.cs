@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 
 public class PlayerController : DinamicObjectController
 {
+    public AudioClip soundOfPutBomb;
     public GameObject bombPrefab;
     public int maxCountOfBombs = 1;
     public int countOfExplosions = 1;
@@ -49,10 +50,17 @@ public class PlayerController : DinamicObjectController
         this.SetMove(this.PlayerRigidbody, moveX, this.RotationByY(moveX, moveZ), moveZ);
     }
 
+    private void PlayPutBombSound()
+    {
+        audioEffect.clip = soundOfPutBomb;
+        audioEffect.Play();
+    }
+
     private void Start()
     {
         this.Speed = Game.DinamicObjectSpeed;
         this.PlayerRigidbody = gameObject.GetComponent<Rigidbody>();
+        this.audioEffect = gameObject.GetComponentInChildren<AudioSource>();
 
         this.animator = GetComponent<Animator>();
         this.messageText = Game.GUI.GetComponentInChildren<Text>();
@@ -72,7 +80,7 @@ public class PlayerController : DinamicObjectController
 
             if (this.CanPutBomb(x,z))
             {
-                this.PutBomb(x,z);
+                StartCoroutine(this.PutBomb(x,z));
             }
         }
     }
@@ -153,13 +161,18 @@ public class PlayerController : DinamicObjectController
         }
     }
 
-    private void PutBomb(float x, float z)
+    private IEnumerator PutBomb(float x, float z)
     {
+        this.animator.SetTrigger("SetBomb");
+        StartCoroutine(SetMoveTimeout(1.75f));
+
+        yield return new WaitForSeconds(1);
+
         GameObject bomb = Game.AddObjectToMap(this.bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb);
         BombController bombController = bomb.GetComponent<BombController>();
         bombController.countOfExplosions = this.countOfExplosions;
-        this.animator.SetTrigger("SetBomb");
-        StartCoroutine(SetTimeout(1.5f));
+
+
         this.playersBomb.Add(bomb);
     }
 

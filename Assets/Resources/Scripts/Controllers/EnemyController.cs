@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyController : DinamicObjectController
 {
+    public AudioClip soundOfAttack;
+    public AudioClip soundOfWin;
     public int countOfNoRandomSteps = 50;
 
     protected Rigidbody enemyRigidbody;
@@ -16,6 +18,18 @@ public class EnemyController : DinamicObjectController
     public override void Move()
     {
         this.SetMove(this.enemyRigidbody, this.step.x, this.RotationByY(this.step.x, this.step.z), this.step.z);
+    }
+
+    protected void PlayAttackSound()
+    {
+        audioEffect.clip = soundOfAttack;
+        audioEffect.Play();
+    }
+
+    protected void PlayWinSound()
+    {
+        audioEffect.clip = soundOfWin;
+        audioEffect.Play();
     }
 
     protected void RandomStep()
@@ -76,7 +90,7 @@ public class EnemyController : DinamicObjectController
         if (collision.gameObject.tag == "Player")
         {
             this.animator.SetTrigger("Attack");
-            StartCoroutine(SetTimeout(5f));
+            StartCoroutine(SetMoveTimeout(5f));
             //Destroy(collision.gameObject);
         }
     }
@@ -99,7 +113,7 @@ public class EnemyController : DinamicObjectController
     {
         this.enemyRigidbody = gameObject.GetComponent<Rigidbody>();
         this.currentCountOfSteps = this.countOfNoRandomSteps;
-
+        this.audioEffect = gameObject.GetComponentInChildren<AudioSource>();
         this.Speed = Game.DinamicObjectSpeed;
         this.randomValue = new System.Random();
         this.animator = GetComponent<Animator>();

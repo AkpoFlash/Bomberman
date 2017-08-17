@@ -562,6 +562,7 @@ GameObject:
   - component: {fileID: 95262061625957836}
   - component: {fileID: 114152115000700280}
   - component: {fileID: 54065103386334486}
+  - component: {fileID: 81399479376759246}
   m_Layer: 0
   m_Name: CowboyPlayer
   m_TagString: Player
@@ -774,6 +775,7 @@ GameObject:
   - component: {fileID: 4537375181343834}
   - component: {fileID: 137988835278410504}
   - component: {fileID: 64395478066525446}
+  - component: {fileID: 82910256140225314}
   m_Layer: 0
   m_Name: CowBoy
   m_TagString: Player
@@ -1559,6 +1561,95 @@ MeshCollider:
   m_InflateMesh: 1
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: ad52d12ad7e12c644a18f176d31a93bb, type: 3}
+--- !u!81 &81399479376759246
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701378124590514}
+  m_Enabled: 1
+  m_ExtensionPropertyValues: []
+--- !u!82 &82910256140225314
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923425774206958}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  m_ExtensionPropertyValues: []
 --- !u!95 &95262061625957836
 Animator:
   serializedVersion: 3
@@ -1587,6 +1678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca09a5e1c3ef9e44b84bce2f45f368e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundOfStep: {fileID: 8300000, guid: fc8da02e95435406f89db024451a0bb8, type: 3}
+  soundOfDeath: {fileID: 8300000, guid: 8f53ad2d958c048e5a8e403a20d21df0, type: 3}
+  soundOfPutBomb: {fileID: 8300000, guid: 1e4b0796170cc43a7ba72c858ab4ca2d, type: 3}
   bombPrefab: {fileID: 1850737878576208, guid: 9bc626a57659f4a4ea6160a638cb7557, type: 2}
   maxCountOfBombs: 1
   countOfExplosions: 1
@@ -1599,6 +1693,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1614,6 +1709,7 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
