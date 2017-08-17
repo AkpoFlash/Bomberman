@@ -28,22 +28,32 @@ public class EnemyProController : EnemyController
             }
         }
 
-        Vector3 currentPosition = Round(gameObject.transform.position);
-        Vector3 endPosition = Round(GameObject.FindGameObjectWithTag("Player").transform.position);
-
-        List<Vector3> path = AStar.FindPath(pathMatrix, currentPosition, endPosition);
-
-
-        if (path != null && path.Count > 0)
+        if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            this.step = path.ToArray()[1] - currentPosition;
+            Vector3 currentPosition = Round(gameObject.transform.position);
+            Vector3 endPosition = Round(GameObject.FindGameObjectWithTag("Player").transform.position);
+
+            List<Vector3> path = AStar.FindPath(pathMatrix, currentPosition, endPosition);
+
+
+            if (path != null && path.Count > 0)
+            {
+                this.step = path.ToArray()[1] - currentPosition;
+            }
+            else
+            {
+                this.RandomStep();
+            }
         }
         else
         {
             this.RandomStep();
         }
 
-        this.Move();
+
+        if (this.canMove)
+            this.Move();
+
     }
 
 }

@@ -562,7 +562,6 @@ GameObject:
   - component: {fileID: 95262061625957836}
   - component: {fileID: 114152115000700280}
   - component: {fileID: 54065103386334486}
-  - component: {fileID: 136570267189489580}
   m_Layer: 0
   m_Name: CowboyPlayer
   m_TagString: Player
@@ -774,6 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4537375181343834}
   - component: {fileID: 137988835278410504}
+  - component: {fileID: 64395478066525446}
   m_Layer: 0
   m_Name: CowBoy
   m_TagString: Player
@@ -1214,7 +1214,7 @@ Transform:
   m_GameObject: {fileID: 1923425774206958}
   m_LocalRotation: {x: -0.7047417, y: -0.000004724155, z: -0.0000011025262, w: 0.70946395}
   m_LocalPosition: {x: 0.00000009689331, y: 0.72371125, z: 0.07371313}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalScale: {x: 0.75, y: 1.0000001, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 4809102581166732}
   m_RootOrder: 1
@@ -1411,7 +1411,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701378124590514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.046026, y: -3.306, z: -24.279366}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4514399748160448}
@@ -1545,6 +1545,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!64 &64395478066525446
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923425774206958}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 1
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: ad52d12ad7e12c644a18f176d31a93bb, type: 3}
 --- !u!95 &95262061625957836
 Animator:
   serializedVersion: 3
@@ -1576,19 +1590,6 @@ MonoBehaviour:
   bombPrefab: {fileID: 1850737878576208, guid: 9bc626a57659f4a4ea6160a638cb7557, type: 2}
   maxCountOfBombs: 1
   countOfExplosions: 1
---- !u!136 &136570267189489580
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1701378124590514}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.75
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!137 &137988835278410504
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1598,12 +1599,11 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: d5b05ed077a93c94598d50b9de901d5d, type: 2}
+  - {fileID: 2100000, guid: c875d2d85605699469e14fc0b88a518e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1614,7 +1614,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

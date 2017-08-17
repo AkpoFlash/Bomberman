@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class DinamicObjectController : MonoBehaviour
 {
-
+    protected bool canMove = true;
     public float Speed { get; set; }
     public abstract void Move();
 
@@ -56,6 +56,13 @@ public abstract class DinamicObjectController : MonoBehaviour
     protected Vector3 Round(Vector3 vector)
     {
         return new Vector3(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y), Mathf.RoundToInt(vector.z));
+    }
+
+    protected IEnumerator SetTimeout(float seconds)
+    {
+        this.canMove = false;
+        yield return new WaitForSeconds(seconds);
+        this.canMove = true;
     }
 
 }

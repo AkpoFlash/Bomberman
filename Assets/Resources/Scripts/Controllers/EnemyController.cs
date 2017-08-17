@@ -76,7 +76,7 @@ public class EnemyController : DinamicObjectController
         if (collision.gameObject.tag == "Player")
         {
             this.animator.SetTrigger("Attack");
-            this.step = new Vector3(0,0,0);
+            StartCoroutine(SetTimeout(5f));
             //Destroy(collision.gameObject);
         }
     }
@@ -108,12 +108,9 @@ public class EnemyController : DinamicObjectController
     private void FixedUpdate()
     {
         this.RandomStep();
-        this.Move();
-    }
 
-    private IEnumerator SetTimeOut(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
+        if (this.canMove)
+            this.Move();
     }
 
 }

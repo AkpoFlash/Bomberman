@@ -25,7 +25,18 @@ public class ExplosionController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.tag == "Player" || other.tag == "Enemy")
+        {
+            other.GetComponentInParent<Animator>().SetTrigger("Killed");
+            other.transform.position += new Vector3(0, -0.75f, 0);
+            other.GetComponentInParent<DinamicObjectController>().enabled = false;
+            other.GetComponent<Collider>().enabled = false;
+            Destroy(other.gameObject, 4);
+        }
+        else
+        {
+            Destroy(other.gameObject);
+        }
     }
 
 }
