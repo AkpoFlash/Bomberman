@@ -27,6 +27,9 @@ public class BombController : MonoBehaviour
         float x = Mathf.Round(gameObject.transform.position.x);
         float z = Mathf.Round(gameObject.transform.position.z);
 
+        AudioSource audioEffect = gameObject.GetComponent<AudioSource>();
+        audioEffect.Play();
+
         gameObject.transform.localScale = new Vector3(0,0,0);
         this.explosionDirection.Add(new Vector3(x, 0.5f, z), StepForward(new Vector3(x, 0.5f, z)));
 
