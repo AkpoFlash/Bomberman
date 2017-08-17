@@ -60,7 +60,8 @@ public class PlayerController : DinamicObjectController
 
     private void FixedUpdate()
     {
-        this.Move();
+        if (this.canMove)
+            this.Move();
 
         this.RemoveExplodedBombs();
 
@@ -80,10 +81,17 @@ public class PlayerController : DinamicObjectController
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            this.animator.SetTrigger("Killed");
-            gameObject.GetComponent<Collider>().isTrigger = true;
-            Destroy(gameObject,2);
+            Death();
         }
+    }
+
+    private void Death()
+    {
+        this.animator.SetTrigger("Killed");
+        gameObject.transform.position += new Vector3(0, -0.75f, 0);
+        gameObject.GetComponent<PlayerController>().enabled = false;
+        gameObject.GetComponentInChildren<Collider>().enabled = false;
+        Destroy(gameObject, 4);
     }
 
     private void OnTriggerExit(Collider other)
@@ -124,7 +132,7 @@ public class PlayerController : DinamicObjectController
                     {
                         foreach (GameObject breakWall in GameObject.FindGameObjectsWithTag("Break Wall"))
                         {
-                            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), breakWall.GetComponent<Collider>());
+                            Physics.IgnoreCollision(gameObject.GetComponentInChildren<Collider>(), breakWall.GetComponent<Collider>());
                         }
                         this.wallHack = true;
                     }
@@ -151,6 +159,7 @@ public class PlayerController : DinamicObjectController
         BombController bombController = bomb.GetComponent<BombController>();
         bombController.countOfExplosions = this.countOfExplosions;
         this.animator.SetTrigger("SetBomb");
+        StartCoroutine(SetTimeout(1.5f));
         this.playersBomb.Add(bomb);
     }
 
