@@ -30,7 +30,7 @@ public abstract class EnvironmentGenerator
 
     protected bool IsBounded(int i, int j)
     {
-        return i == 0 || j == 0 || i == Game.Row - 1 || j == Game.Col - 1;
+        return i == 0 || j == 0 || i == Game.row - 1 || j == Game.col - 1;
     }
 
     protected bool IsEvenCell(int i, int j)

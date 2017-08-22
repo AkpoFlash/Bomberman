@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65747086465147790}
   - component: {fileID: 23101817332479874}
   - component: {fileID: 54685723389529182}
+  - component: {fileID: 114797562209737852}
   m_Layer: 0
   m_Name: UnbreakWall
   m_TagString: Unbreak Wall
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057345183831052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.39, y: 0, z: 9.24}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,3 +110,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114797562209737852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057345183831052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 167
+    i1: 213
+    i2: 115
+    i3: 230
+    i4: 166
+    i5: 173
+    i6: 23
+    i7: 228
+    i8: 91
+    i9: 197
+    i10: 152
+    i11: 49
+    i12: 214
+    i13: 1
+    i14: 162
+    i15: 58
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1

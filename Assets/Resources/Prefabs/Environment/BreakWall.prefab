@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65747086465147790}
   - component: {fileID: 23101817332479874}
   - component: {fileID: 54459381531190752}
+  - component: {fileID: 114622658087125696}
   m_Layer: 0
   m_Name: BreakWall
   m_TagString: Break Wall
@@ -52,7 +53,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -68,7 +68,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -111,3 +110,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114622658087125696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057345183831052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 177
+    i1: 225
+    i2: 211
+    i3: 185
+    i4: 21
+    i5: 166
+    i6: 87
+    i7: 148
+    i8: 58
+    i9: 52
+    i10: 249
+    i11: 47
+    i12: 18
+    i13: 0
+    i14: 217
+    i15: 119
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1

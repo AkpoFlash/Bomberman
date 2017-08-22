@@ -16,8 +16,8 @@ public abstract class DinamicObjectGenerator
 
         while (currentCountOfObject < this.CountOfObjects)
         {
-            int row = randomValue.Next(1, Game.Row);
-            int col = randomValue.Next(1, Game.Col);
+            int row = randomValue.Next(1, Game.row);
+            int col = randomValue.Next(1, Game.col);
 
             if (IsCellAvailable(row, col))
             {
@@ -30,7 +30,7 @@ public abstract class DinamicObjectGenerator
 
     protected virtual bool IsCellAvailable(int row, int col)
     {
-        return Game.MatrixMap[row, col] == (int)ObjectType.Empty;
+        return Game.matrixMap[row, col] == (int)ObjectType.Empty;
     }
 
 }

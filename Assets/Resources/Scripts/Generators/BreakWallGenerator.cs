@@ -7,8 +7,8 @@ public class BreakWallGenerator : EnvironmentGenerator
 {
 
     protected override int StartCoordinate { get { return 2; } }
-    protected override int MaxRowCoordinate { get { return Game.Row - 2; } }
-    protected override int MaxColCoordinate { get { return Game.Col - 2; } }
+    protected override int MaxRowCoordinate { get { return Game.row - 2; } }
+    protected override int MaxColCoordinate { get { return Game.col - 2; } }
     protected override float PositionOnY { get { return 0.5f; } }
 
     protected override ObjectType TypeOfObject { get { return ObjectType.BreakWall; } }
@@ -20,7 +20,7 @@ public class BreakWallGenerator : EnvironmentGenerator
 
     private bool CanSetBreakWall(int i, int j, int currentCountOfWall)
     {
-        return Game.MatrixMap[i, j] == (int)ObjectType.Empty
+        return Game.matrixMap[i, j] == (int)ObjectType.Empty
                 && !(i == 1 && j == 1 || i == 1 && j == 2 || i == 2 && j == 1)
                 && currentCountOfWall < Game.CountOfBreakWall;
     }

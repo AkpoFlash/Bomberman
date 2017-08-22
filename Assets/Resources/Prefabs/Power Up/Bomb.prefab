@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135808390084985372}
   - component: {fileID: 114705145350239066}
   - component: {fileID: 82860772851489838}
+  - component: {fileID: 114350346131520488}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: BombPowerUp
@@ -83,7 +84,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -99,7 +99,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -195,7 +194,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_ExtensionPropertyValues: []
 --- !u!95 &95588216137112150
 Animator:
   serializedVersion: 3
@@ -213,6 +211,38 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114350346131520488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005218877521366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 29
+    i1: 181
+    i2: 132
+    i3: 238
+    i4: 113
+    i5: 31
+    i6: 204
+    i7: 100
+    i8: 233
+    i9: 95
+    i10: 214
+    i11: 240
+    i12: 8
+    i13: 78
+    i14: 0
+    i15: 49
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114705145350239066
 MonoBehaviour:
   m_ObjectHideFlags: 1

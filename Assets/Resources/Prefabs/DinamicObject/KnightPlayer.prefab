@@ -483,7 +483,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682498718985240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.9247746, y: 2.4982502, z: 2.3244414}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4374536481528578}
@@ -842,6 +842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca09a5e1c3ef9e44b84bce2f45f368e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundOfStep: {fileID: 0}
+  soundOfDeath: {fileID: 0}
+  soundOfPutBomb: {fileID: 0}
   bombPrefab: {fileID: 1850737878576208, guid: 9bc626a57659f4a4ea6160a638cb7557, type: 2}
   maxCountOfBombs: 1
   countOfExplosions: 2
@@ -867,7 +870,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -883,7 +885,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

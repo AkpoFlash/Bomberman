@@ -6,12 +6,12 @@ public class MapGenerator {
 
     public MapGenerator(int rowCount, int colCount, int countOfBreakWall, int countOfEnemies, int countOfProEnemies)
     {
-        Game.Row = rowCount;
-        Game.Col = colCount;
+        Game.row = rowCount;
+        Game.col = colCount;
         Game.CountOfBreakWall = countOfBreakWall;
         Game.CountOfEnemies = countOfEnemies;
         Game.CountOfProEnemies = countOfProEnemies;
-        Game.MatrixMap = new int[rowCount, colCount];
+        Game.matrixMap = new int[rowCount, colCount];
     }
 
     public void AddGround(GameObject gameObject)
@@ -22,8 +22,6 @@ public class MapGenerator {
 
     public void AddBreakWall(GameObject gameObject, bool randomBreakWall = true)
     {
-
-
         if (randomBreakWall)
         {
             BreakWallRandomGenerator breakWall = new BreakWallRandomGenerator();

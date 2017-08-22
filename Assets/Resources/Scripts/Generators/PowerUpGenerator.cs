@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PowerUpGenerator
 {
@@ -10,14 +11,15 @@ public class PowerUpGenerator
     public void Generate(GameObject[] gameObject)
     {
 
-        for (int i = 1; i < Game.Row - 1; i++)
+        for (int i = 1; i < Game.row - 1; i++)
         {
-            for (int j = 1; j < Game.Col - 1; j++)
+            for (int j = 1; j < Game.col - 1; j++)
             {
                 if (this.IsBreakWall(i, j) && Game.CheckRandomAppearance(Game.probabilityAppearancePowerUp, this.randomValue))
                 {
                     int currentPowerUp = GetRandomPowerUp(gameObject.Length);
-                    MonoBehaviour.Instantiate(gameObject[currentPowerUp], new Vector3(j, 0, i), Quaternion.identity);
+                    GameObject obj = MonoBehaviour.Instantiate(gameObject[currentPowerUp], new Vector3(j, 0, i), Quaternion.identity);
+                    NetworkServer.Spawn(obj);
                 }
             }
         }
@@ -25,7 +27,7 @@ public class PowerUpGenerator
 
     protected bool IsBreakWall(int row, int col)
     {
-        return Game.MatrixMap[row, col] == (int)ObjectType.BreakWall;
+        return Game.matrixMap[row, col] == (int)ObjectType.BreakWall;
     }
 
     private int GetRandomPowerUp(int borderOfRandom)
