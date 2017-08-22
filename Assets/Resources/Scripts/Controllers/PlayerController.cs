@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
@@ -13,13 +14,13 @@ public class PlayerController : DinamicObjectController
     public int maxCountOfBombs = 1;
     public int countOfExplosions = 1;
 
-    private Rigidbody PlayerRigidbody { get; set; }
     private bool wallHack = false;
     private Animator animator;
     private Text messageText;
     private List<GameObject> playersBomb = new List<GameObject>();
 
-    public override void Move()
+    [Command]
+    public override void CmdMove()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -47,7 +48,12 @@ public class PlayerController : DinamicObjectController
             }
         }
 
-        this.SetMove(this.PlayerRigidbody, moveX, this.RotationByY(moveX, moveZ), moveZ);
+        this.SetMove(moveX, this.RotationByY(moveX, moveZ), moveZ);
+    }
+
+    public override void OnStartServer()
+    {
+        this.Generate();
     }
 
     private void PlayPutBombSound()
@@ -59,28 +65,31 @@ public class PlayerController : DinamicObjectController
     private void Start()
     {
         this.Speed = Game.DinamicObjectSpeed;
-        this.PlayerRigidbody = gameObject.GetComponent<Rigidbody>();
+        this.Rigidbody = gameObject.GetComponent<Rigidbody>();
         this.audioEffect = gameObject.GetComponentInChildren<AudioSource>();
-
         this.animator = GetComponent<Animator>();
         this.messageText = Game.GUI.GetComponentInChildren<Text>();
     }
 
     private void FixedUpdate()
     {
-        if (this.canMove)
-            this.Move();
-
-        this.RemoveExplodedBombs();
-
-        if (Input.GetKeyDown("space"))
+        if (isLocalPlayer)
         {
-            float x = Mathf.Round(gameObject.transform.position.x);
-            float z = Mathf.Round(gameObject.transform.position.z);
+            if (this.canMove)
+                this.CmdMove();
 
-            if (this.CanPutBomb(x,z))
+            this.RemoveExplodedBombs();
+
+            if (Input.GetKeyDown("space"))
             {
-                StartCoroutine(this.PutBomb(x,z));
+                float x = Mathf.Round(gameObject.transform.position.x);
+                float z = Mathf.Round(gameObject.transform.position.z);
+
+                if (this.CanPutBomb(x, z))
+                {
+                    this.PutBomb(x, z);
+                    //StartCoroutine(this.PutBomb(x, z));
+                }
             }
         }
     }
@@ -89,11 +98,12 @@ public class PlayerController : DinamicObjectController
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Death();
+            CmdDeath();
         }
     }
 
-    private void Death()
+    [Command]
+    private void CmdDeath()
     {
         this.animator.SetTrigger("Killed");
         gameObject.transform.position += new Vector3(0, -0.75f, 0);
@@ -116,24 +126,25 @@ public class PlayerController : DinamicObjectController
 
     private void OnTriggerEnter(Collider other)
     {
+
         int row = (int)other.gameObject.transform.position.z;
         int col = (int)other.gameObject.transform.position.x;
 
-        if (Game.MatrixMap[row, col] != (int)ObjectType.BreakWall)
+        if (Game.matrixMap[row, col] != (int)ObjectType.BreakWall)
         {
             switch (other.gameObject.tag)
             {
                 case "BombPowerUp":
                     this.maxCountOfBombs++;
-                    this.PickUpPowerUp(other.gameObject, "BOMBS", this.maxCountOfBombs.ToString());
+                    this.CmdPickUpPowerUp(other.gameObject, "BOMBS", this.maxCountOfBombs.ToString());
                     break;
                 case "ExplosionPowerUp":
                     this.countOfExplosions++;
-                    this.PickUpPowerUp(other.gameObject, "EXPLOSION", this.countOfExplosions.ToString());
+                    this.CmdPickUpPowerUp(other.gameObject, "EXPLOSION", this.countOfExplosions.ToString());
                     break;
                 case "SpeedPowerUp":
                     this.Speed++;
-                    this.PickUpPowerUp(other.gameObject, "SPEED", this.Speed.ToString());
+                    this.CmdPickUpPowerUp(other.gameObject, "SPEED", this.Speed.ToString());
                     break;
                 case "WallHackPowerUp":
                     if (!this.wallHack)
@@ -144,7 +155,7 @@ public class PlayerController : DinamicObjectController
                         }
                         this.wallHack = true;
                     }
-                    this.PickUpPowerUp(other.gameObject, "WALL HACK", this.wallHack.ToString());
+                    this.CmdPickUpPowerUp(other.gameObject, "WALL HACK", this.wallHack.ToString());
                     break;
             }
         }
@@ -161,43 +172,63 @@ public class PlayerController : DinamicObjectController
         }
     }
 
-    private IEnumerator PutBomb(float x, float z)
+    private void PutBomb(float x, float z)
     {
+        Game.matrixMap[(int)z, (int)x] = (int)ObjectType.Bomb;
+
         this.animator.SetTrigger("SetBomb");
+
         StartCoroutine(SetMoveTimeout(1.75f));
 
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
+        CmdCreateBomb(x, z);
+    }
 
+    [Command]
+    private void CmdCreateBomb(float x, float z)
+    {
         GameObject bomb = Game.AddObjectToMap(this.bombPrefab, new Vector3(x, 0.5f, z), ObjectType.Bomb);
         BombController bombController = bomb.GetComponent<BombController>();
         bombController.countOfExplosions = this.countOfExplosions;
-
 
         this.playersBomb.Add(bomb);
     }
 
     private bool CanPutBomb(float x, float z)
     {
-        return Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.BreakWall
-            && Game.MatrixMap[(int)z, (int)x] != (int)ObjectType.Bomb
+        return Game.matrixMap[(int)z, (int)x] != (int)ObjectType.BreakWall
+            && Game.matrixMap[(int)z, (int)x] != (int)ObjectType.Bomb
             && this.playersBomb.Count < this.maxCountOfBombs;
     }
 
     private IEnumerator ClearMessage()
     {
         yield return new WaitForSeconds(2f);
-        this.messageText.text = "";
+        RpcChangeMessageText("");
     }
 
-    private void PickUpPowerUp(GameObject gameObject, string name, string levelPowerUp)
+    [Command]
+    private void CmdPickUpPowerUp(GameObject gameObject, string name, string levelPowerUp)
     {
-        //StopCoroutine(ClearMessage());
+        RpcPowerUpEffect(gameObject);
+
+        RpcChangeMessageText(String.Format("Pick up {0} power up ({1})", name, levelPowerUp));
+
+        StartCoroutine(ClearMessage());
+    }
+
+    [ClientRpc]
+    private void RpcPowerUpEffect(GameObject gameObject)
+    {
         AudioSource audioEffect = gameObject.GetComponent<AudioSource>();
         audioEffect.Play();
-
-        this.messageText.text = String.Format("Pick up {0} power up ({1})", name, levelPowerUp);
         this.Animate(gameObject, 0, 3, 0);
-        StartCoroutine(ClearMessage());
+    }
+
+    [ClientRpc]
+    private void RpcChangeMessageText(string newText)
+    {
+        this.messageText.text = newText;
     }
 
     private void Animate(GameObject gameObject, float x, float y, float z)
@@ -216,6 +247,41 @@ public class PlayerController : DinamicObjectController
             yield return new WaitForEndOfFrame();
         }
         Destroy(gameObject);
+    }
+
+    private void Generate()
+    {
+        System.Random randomValue = new System.Random();
+        int currentCountOfObject = 0;
+
+        while (currentCountOfObject < 1)
+        {
+            int row = randomValue.Next(1, Game.row);
+            int col = randomValue.Next(1, Game.col);
+
+            if (IsCellAvailable(row, col) && CanSetPlayer(row, col))
+            {
+                Game.matrixMap[row, col] = (int)ObjectType.Player;
+                gameObject.transform.position = new Vector3(col, 0, row);
+                currentCountOfObject++;
+            }
+        }
+
+    }
+
+    private bool IsCellAvailable(int row, int col)
+    {
+        return Game.matrixMap[row, col] == (int)ObjectType.Empty && Game.matrixMap[row, col] != (int)ObjectType.Player;
+    }
+
+    private bool CanSetPlayer(int row, int col)
+    {
+        bool emptyUp = Game.matrixMap[row + 1, col] == (int)ObjectType.Empty;
+        bool emptyRight = Game.matrixMap[row, col + 1] == (int)ObjectType.Empty;
+        bool emptyDown = Game.matrixMap[row - 1, col] == (int)ObjectType.Empty;
+        bool emptyLeft = Game.matrixMap[row, col - 1] == (int)ObjectType.Empty;
+
+        return (emptyUp && emptyRight) || (emptyRight && emptyDown) || (emptyDown && emptyLeft) || (emptyLeft && emptyUp);
     }
 
 }

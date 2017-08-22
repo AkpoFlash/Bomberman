@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BombController : MonoBehaviour
+public class BombController : NetworkBehaviour
 {
 
     public GameObject explosionPrefab;
-    public int countOfExplosions;
+    public int countOfExplosions = 1;
     public float secondsToExplosion = 3;
 
     private Dictionary<Vector3, bool> explosionDirection = new Dictionary<Vector3, bool>();
@@ -43,6 +44,7 @@ public class BombController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        Game.matrixMap[(int)z, (int)x] = (int)ObjectType.Empty;
         Destroy(gameObject);
     }
 
@@ -62,12 +64,12 @@ public class BombController : MonoBehaviour
             {
                 if (IsObjectInPosition(position, ObjectType.BreakWall))
                 {
-                    Game.AddObjectToMap(this.explosionPrefab, position, ObjectType.Explosion);
+                    CmdCreateExplosion(position);
                     return false;
                 }
                 else
                 {
-                    Game.AddObjectToMap(this.explosionPrefab, position, ObjectType.Explosion);
+                    CmdCreateExplosion(position);
                     return true;
                 }
             }
@@ -75,14 +77,20 @@ public class BombController : MonoBehaviour
         return false;
     }
 
+    [Command]
+    private void CmdCreateExplosion(Vector3 position)
+    {
+        Game.AddObjectToMap(this.explosionPrefab, position, ObjectType.Explosion);
+    }
+
     private bool IsСoordinateInMap(Vector3 position)
     {
-        return position.x > 0 && position.z > 0 && position.x < Game.Col - 1 && position.z < Game.Row - 1;
+        return position.x > 0 && position.z > 0 && position.x < Game.col - 1 && position.z < Game.row - 1;
     }
 
     private bool IsObjectInPosition(Vector3 position, ObjectType gameObjectType)
     {
-        return Game.MatrixMap[(int)position.z, (int)position.x] == (int)gameObjectType;
+        return Game.matrixMap[(int)position.z, (int)position.x] == (int)gameObjectType;
     }
 
 }

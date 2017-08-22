@@ -16,10 +16,10 @@ public class PlayerGenerator : DinamicObjectGenerator
 
     private bool CanSetPlayer(int row, int col)
     {
-        bool emptyUp = Game.MatrixMap[row + 1, col] == (int)ObjectType.Empty;
-        bool emptyRight = Game.MatrixMap[row, col + 1] == (int)ObjectType.Empty;
-        bool emptyDown = Game.MatrixMap[row - 1, col] == (int)ObjectType.Empty;
-        bool emptyLeft = Game.MatrixMap[row, col - 1] == (int)ObjectType.Empty;
+        bool emptyUp = Game.matrixMap[row + 1, col] == (int)ObjectType.Empty;
+        bool emptyRight = Game.matrixMap[row, col + 1] == (int)ObjectType.Empty;
+        bool emptyDown = Game.matrixMap[row - 1, col] == (int)ObjectType.Empty;
+        bool emptyLeft = Game.matrixMap[row, col - 1] == (int)ObjectType.Empty;
 
         return (emptyUp && emptyRight) || (emptyRight && emptyDown) || (emptyDown && emptyLeft) || (emptyLeft && emptyUp);
     }

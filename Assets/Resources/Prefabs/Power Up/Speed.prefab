@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136966026982416866}
   - component: {fileID: 114315108896336876}
   - component: {fileID: 82835953164705418}
+  - component: {fileID: 114158343404901340}
   m_Layer: 0
   m_Name: Speed
   m_TagString: SpeedPowerUp
@@ -54,7 +55,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +71,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -167,7 +166,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_ExtensionPropertyValues: []
 --- !u!95 &95725756970404338
 Animator:
   serializedVersion: 3
@@ -185,6 +183,38 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114158343404901340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990018016290510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 252
+    i1: 178
+    i2: 43
+    i3: 119
+    i4: 63
+    i5: 37
+    i6: 107
+    i7: 164
+    i8: 138
+    i9: 197
+    i10: 87
+    i11: 127
+    i12: 242
+    i13: 127
+    i14: 110
+    i15: 138
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114315108896336876
 MonoBehaviour:
   m_ObjectHideFlags: 1

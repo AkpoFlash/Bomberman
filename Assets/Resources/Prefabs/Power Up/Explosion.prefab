@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 136047048880781098}
   - component: {fileID: 114169673617776298}
   - component: {fileID: 82312722808173294}
+  - component: {fileID: 114392775817279670}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: ExplosionPowerUp
@@ -54,7 +55,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +71,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -167,7 +166,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_ExtensionPropertyValues: []
 --- !u!95 &95150577306570644
 Animator:
   serializedVersion: 3
@@ -196,6 +194,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f1fee06f40ec5478e11794bbd37d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114392775817279670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1651211746347556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 42
+    i1: 193
+    i2: 236
+    i3: 191
+    i4: 217
+    i5: 20
+    i6: 129
+    i7: 164
+    i8: 137
+    i9: 113
+    i10: 218
+    i11: 166
+    i12: 118
+    i13: 194
+    i14: 62
+    i15: 172
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!136 &136047048880781098
 CapsuleCollider:
   m_ObjectHideFlags: 1

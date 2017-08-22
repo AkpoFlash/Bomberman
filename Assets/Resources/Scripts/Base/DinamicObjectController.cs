@@ -1,25 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public abstract class DinamicObjectController : MonoBehaviour
+public abstract class DinamicObjectController : NetworkBehaviour
 {
     public AudioClip soundOfStep;
     public AudioClip soundOfDeath;
     public float Speed { get; set; }
-    public abstract void Move();
+    public abstract void CmdMove();
 
+    protected Rigidbody Rigidbody { get; set; }
     protected float Rotation { get; set; }
     protected bool canMove = true;
     protected AudioSource audioEffect;
 
-
-    protected void SetMove(Rigidbody rigidBody, float x, float y, float z)
+    protected void SetMove(float x, float y, float z)
     {
-        rigidBody.transform.rotation = Quaternion.Euler(0, y, 0);
-        Vector3 start = rigidBody.position;
-        Vector3 end = rigidBody.position + new Vector3(x, 0, z) * Time.deltaTime * this.Speed;
-        StartCoroutine(GetStep(rigidBody, start, end));
+        this.Rigidbody.transform.rotation = Quaternion.Euler(0, y, 0);
+        Vector3 start = this.Rigidbody.position;
+        Vector3 end = this.Rigidbody.position + new Vector3(x, 0, z) * Time.deltaTime * this.Speed;
+        StartCoroutine(GetStep(this.Rigidbody, start, end));
     }
 
     protected IEnumerator GetStep(Rigidbody rigidBody, Vector3 start, Vector3 end)

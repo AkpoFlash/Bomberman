@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ExplosionController : MonoBehaviour
+public class ExplosionController : NetworkBehaviour
 {
 
     public float secondsToDisappear = 0.3f;

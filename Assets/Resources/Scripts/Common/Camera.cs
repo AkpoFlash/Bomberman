@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public static class Camera
 {
-
-	public static void SetCamera(GameObject camera) {
-        camera.transform.position = new Vector3(Game.Col / 2, Game.GetMaxCoord(), Game.Row / 5);
+    [Command]
+	public static void CmdSetCamera(GameObject camera) {
+        camera.transform.position = new Vector3(Game.col / 2, Game.GetMaxCoord(), Game.row / 5);
 	}
 
 }

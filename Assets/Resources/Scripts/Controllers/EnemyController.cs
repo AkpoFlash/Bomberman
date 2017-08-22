@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EnemyController : DinamicObjectController
 {
@@ -9,15 +10,15 @@ public class EnemyController : DinamicObjectController
     public AudioClip soundOfWin;
     public int countOfNoRandomSteps = 50;
 
-    protected Rigidbody enemyRigidbody;
     protected Vector3 step = new Vector3();
     protected int currentCountOfSteps;
     protected Animator animator;
     protected System.Random randomValue;
 
-    public override void Move()
+    [Command]
+    public override void CmdMove()
     {
-        this.SetMove(this.enemyRigidbody, this.step.x, this.RotationByY(this.step.x, this.step.z), this.step.z);
+        this.SetMove(this.step.x, this.RotationByY(this.step.x, this.step.z), this.step.z);
     }
 
     protected void PlayAttackSound()
@@ -42,7 +43,7 @@ public class EnemyController : DinamicObjectController
         {
             this.currentCountOfSteps = 0;
 
-            this.enemyRigidbody.transform.position = Round(enemyRigidbody.position);
+            this.Rigidbody.transform.position = Round(Rigidbody.position);
             this.step = GetRandomStep();
         }
     }
@@ -111,7 +112,7 @@ public class EnemyController : DinamicObjectController
 
     protected void Start()
     {
-        this.enemyRigidbody = gameObject.GetComponent<Rigidbody>();
+        this.Rigidbody = gameObject.GetComponent<Rigidbody>();
         this.currentCountOfSteps = this.countOfNoRandomSteps;
         this.audioEffect = gameObject.GetComponentInChildren<AudioSource>();
         this.Speed = Game.DinamicObjectSpeed;
@@ -124,7 +125,7 @@ public class EnemyController : DinamicObjectController
         this.RandomStep();
 
         if (this.canMove)
-            this.Move();
+            this.CmdMove();
     }
 
 }

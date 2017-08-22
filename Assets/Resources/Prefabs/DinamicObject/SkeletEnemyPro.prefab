@@ -22,6 +22,9 @@ GameObject:
   - component: {fileID: 95713445498939172}
   - component: {fileID: 54479422376513216}
   - component: {fileID: 114389020055835778}
+  - component: {fileID: 114734900769700354}
+  - component: {fileID: 114223898363995052}
+  - component: {fileID: 114459858461673296}
   m_Layer: 0
   m_Name: SkeletEnemyPro
   m_TagString: Enemy
@@ -1651,7 +1654,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1010855334267990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.174966, y: -1.2398095, z: 30.42109}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4940656632059450}
@@ -2043,7 +2046,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!82 &82635655618373042
 AudioSource:
@@ -2125,7 +2128,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_ExtensionPropertyValues: []
 --- !u!95 &95713445498939172
 Animator:
   serializedVersion: 3
@@ -2143,6 +2145,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114223898363995052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010855334267990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114389020055835778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2159,6 +2182,57 @@ MonoBehaviour:
   soundOfAttack: {fileID: 8300000, guid: 734e4d70c8c084b6ba214e8314ec02b5, type: 3}
   soundOfWin: {fileID: 8300000, guid: 01ac9d875ad134283a51bc22bc34a32b, type: 3}
   countOfNoRandomSteps: 50
+--- !u!114 &114459858461673296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010855334267990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95713445498939172}
+  m_ParameterSendBits: 3
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
+--- !u!114 &114734900769700354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1010855334267990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 51
+    i1: 200
+    i2: 136
+    i3: 138
+    i4: 213
+    i5: 193
+    i6: 208
+    i7: 148
+    i8: 233
+    i9: 88
+    i10: 126
+    i11: 65
+    i12: 7
+    i13: 133
+    i14: 190
+    i15: 186
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!136 &136347240378646910
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2181,7 +2255,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2197,7 +2270,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

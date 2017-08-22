@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public static class AStar
 {
-    public static List<Vector3> FindPath(int[,] field, Vector3 start, Vector3 end)
+    [Command]
+    public static List<Vector3> CmdFindPath(int[,] field, Vector3 start, Vector3 end)
     {
         List<PathNode> closedSet = new List<PathNode>();
         List<PathNode> openSet = new List<PathNode>();
